@@ -29,6 +29,7 @@ namespace WalletApp.Tests
             var result = calculator.CalculateRemainingBudget(500m, 0m);
             Assert.Equal(500m, result);
         }
+        
     }
 }
 
