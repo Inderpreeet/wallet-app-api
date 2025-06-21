@@ -10,7 +10,6 @@ namespace WalletApp.Tests
         {
             var calculator = new BudgetCalculator();
             var result = calculator.CalculateRemainingBudget(1000m, 400m);
-
             Assert.Equal(600m, result);
         }
 
@@ -22,6 +21,15 @@ namespace WalletApp.Tests
             Assert.Throws<ArgumentException>(() => calculator.CalculateRemainingBudget(-100m, 50m));
             Assert.Throws<ArgumentException>(() => calculator.CalculateRemainingBudget(100m, -50m));
         }
+
+        [Fact]
+        public void CalculateRemainingBudget_WithZeroExpenses_ReturnsTotal()
+        {
+            var calculator = new BudgetCalculator();
+            var result = calculator.CalculateRemainingBudget(500m, 0m);
+            Assert.Equal(500m, result);
+        }
     }
 }
+
 
