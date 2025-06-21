@@ -36,5 +36,34 @@ namespace WalletApp.Tests
             var totalSpent = service.GetTotalSpent();
             Assert.Equal(200, totalSpent);
         }
+
+        [Fact]
+        public void AddTransaction_ShouldAddMultipleTransactions()
+        {
+            var service = new TransactionService();
+            service.AddTransaction(new Transaction { Type = "Expense", Amount = 100 });
+            service.AddTransaction(new Transaction { Type = "Income", Amount = 200 });
+
+            Assert.Equal(2, service.GetAllTransactions().Count);
+        }
+
+        [Fact]
+        public void GetAllTransactions_ShouldReturnEmptyList_Initially()
+        {
+            var service = new TransactionService();
+            var transactions = service.GetAllTransactions();
+
+            Assert.Empty(transactions);
+        }
+
+        [Fact]
+        public void GetTotalSpent_ShouldReturnZero_WhenNoExpenses()
+        {
+            var service = new TransactionService();
+            service.AddTransaction(new Transaction { Type = "Income", Amount = 500 });
+
+            var total = service.GetTotalSpent();
+            Assert.Equal(0, total);
+        }
     }
 }
